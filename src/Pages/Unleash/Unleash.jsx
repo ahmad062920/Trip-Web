@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./Unleash.style.css"
 
 const Unleash = () => {
     const navigate = useNavigate();
+    const [selectedImages, setSelectedImages] = useState([]);
+    const images = [
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+        { src: "/Images/Rectangle 3467860.png", alt: "Tree House", label: "Tree House" },
+
+    ];
+    const handleSelect = (index) => {
+        if (selectedImages.includes(index)) {
+            setSelectedImages(selectedImages.filter((i) => i !== index));
+        } else {
+            setSelectedImages([...selectedImages, index]);
+        }
+    };
     return (
         <div>
             <div className='px-28 pt-8'>
@@ -20,46 +40,23 @@ const Unleash = () => {
                 <div className='mt-12 w-1/2 pl-28'>
                     <div className='font-figtree text-[34px] text-purple font-extrabold my-7 w-10/12 leading-10'>Unleash Your Inner Adventurer!</div>
                     <div className='font-figtree text-gray text-xl h-max font-thin my-6 w-[60%]'>We'll use your choices to find attractions you'll love!</div>
-                    <div><Link to='/login'><button className='bg-purple py-2.5 my-3 text-white px-14 rounded-full'>Continue</button></Link></div>
+                    <div><Link to='/login'><button className={`bg-[#C5C5C5] py-2.5 my-3 text-white px-14 rounded-full ${selectedImages.length >= 1 && "bg-purple"}`}>Continue</button></Link></div>
                 </div>
                 <div className='w-[60%] mr-24 mt-9'>
-                    <div className='bg-[#F3F3F3] p-6 flex flex-wrap justify-center overflow-y-scroll h-[430px] custom-scrollbar'>
-                    <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
-                        <div className='w-[28%] my-1 mx-4'>
-                            <img className='hover:border-4 border-purple hover:scale-105 rounded-[11px]' src="/Images/Rectangle 3467860.png" alt="pic" height="100%" width="100%" />
-                            <div className='text-center my-2 text-gray font-figtree'>Tree House</div>
-                        </div>
+                    <div className='bg-[#F3F3F3] p-6 flex flex-wrap justify-center overflow-y-scroll h-[440px] custom-scrollbar'>
+                        {images.map((image, index) => (
+                            <div className='w-[28%] my-1 mx-4' key={index}>
+                                <img
+                                    className={`rounded-xl ${selectedImages.includes(index) ? 'border-4 border-purple scale-105' : 'border-transparent'}`} // Apply border only if selected
+                                    src={image.src}
+                                    alt={image.alt}
+                                    height="100%"
+                                    width="100%"
+                                    onClick={() => handleSelect(index)} // Toggle selection on click
+                                />
+                                <div className='text-center my-2 text-gray font-figtree'>{image.label}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Subscription = () => {
     const navigate = useNavigate();
+    const [toggle, setToggle] = useState(false)
     return (
         <div>
             <div className='px-28 pt-8'>
@@ -18,9 +19,9 @@ const Subscription = () => {
             <div className='flex flex-col justify-center items-center p-6'>
                 <div className='font-figtree text-[34px] text-purple font-extrabold my-2'>Choose Your Subscription Plan</div>
                 <div className='font-figtree text-xl text-gray my-2'>Lorem ipsum dolor sit amet, consectetuer adipiscing </div>
-                <div className='px-1 bg-slate-200 rounded-full flex justify-between my-3'>
-                    <div className='font-figtree py-2 px-6 text-[14px] text-purple font-[600]'>Monthly</div>
-                    <div className='px-3 py-1.5 my-1 bg-purple text-[14px] rounded-full font-figtree'><span className='px-1 text-white'>Yearly</span><span className='text-[#FFB82F]'>-20%</span></div>
+                <div className='p-1 bg-slate-200 rounded-full flex justify-between my-3'>
+                    <button onClick={()=>setToggle(true)} className={`font-figtree py-2  rounded-full px-6 text-[14px] font-[600] ${toggle ? "bg-purple text-white font-normal" : "text-purple bg-slate-200"}`}>Monthly</button>
+                    <button onClick={()=>setToggle(false)} className={`px-3 py-1.5 text-[14px] rounded-full font-figtree ${toggle ? "bg-slate-200" : "bg-purple" }`}><span className={`px-1 ${toggle ? "text-purple font-semibold": "text-white font-normal"}`}>Yearly</span><span className='text-[#FFB82F]'>-20%</span></button>
                 </div>
                 <div className='flex justify-center w-3/4 my-8'>
                     <div className='w-[28%] h-max py-5 mx-2 border border-[#D9D9D9] flex flex-col justify-center items-center px-6 rounded-md'>
