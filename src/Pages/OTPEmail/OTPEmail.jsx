@@ -5,8 +5,8 @@ import OTPInput from '../../Components/OTP/OTPInput';
 
 const OTPEmail = () => {
     const navigate = useNavigate();
-    const [seconds, setSeconds] = useState(60); // Starting at 60 seconds
-  const [isActive, setIsActive] = useState(true); // Timer starts active automatically
+    const [seconds, setSeconds] = useState(60); 
+  const [isActive, setIsActive] = useState(true); 
 
   useEffect(() => {
     let timer = null;
@@ -14,18 +14,18 @@ const OTPEmail = () => {
     if (isActive && seconds > 0) {
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
-      }, 1000); // Decrease by 1 every second
+      }, 1000); 
     } else if (seconds === 0) {
-      clearInterval(timer); // Stop the timer when it reaches 0
+      clearInterval(timer); 
     }
 
-    return () => clearInterval(timer); // Cleanup the timer on unmount
+    return () => clearInterval(timer); 
   }, [isActive, seconds]);
 
   const resetTimer = () => {
     if(seconds==0){
-    setIsActive(true); // Keep timer active
-    setSeconds(60); // Reset to 60 seconds
+    setIsActive(true); 
+    setSeconds(60); 
   }
 };
 
